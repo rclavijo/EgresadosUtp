@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<h1>Página inicio egresados utp</h1> 
+      <section class="hero-section">
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg sp-pad" data-setbg="{%static 'core/img/hero-slider/3.jpg' %}">
+				<div class="hs-text">
+					<h2 class="hs-title">Egresado</h2>
+					<p class="hs-des">Entra en contacto con la Universidad <br> UTP</p>
+				</div>
+			</div>
+			<div class="hs-item set-bg sp-pad" data-setbg="{% static 'core/img/hero-slider/4.jpg' %}">
+				<div class="hs-text">
+					<h6 class="hs-des">Participa!!!</h6>
+				</div>
+			</div>
+			<div class="hs-item set-bg sp-pad" data-setbg="{% static 'core/img/placeholder.jpg' %}">
+				<div class="hs-text">
+					<h6 class="hs-des">Unete!!!</h6>
+				</div>
+			</div>
+			<div class="hs-item set-bg sp-pad" data-setbg="{% static 'core/img/hero-slider/6.jpg' %}">
+				<div class="hs-text">
+					<h6 class="hs-des">Integrate!!!</h6>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<style>.errorlist{color:red;} label{display:none}</style>
+<main role="main">
+<div class="container">
+<form action="" method="post">{% csrf_token %}   
+    <div class="row ">                
+        <h3 class="mb-4">Registro Egresados UTP</h3>          
+              {% for field in form %}
+              <div class= "col-md-8 col-md-offset-2">
+            <div class="form-group">
+              {{field.label}}
+              {{field}}
+            </div>  
+            </div>             
+           {% endfor %}                        
+      </div>
+      <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
+      </form>
+      </div>
+</main>
+{% endblock %}
