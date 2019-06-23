@@ -58,14 +58,18 @@ class EgresadoForm(forms.ModelForm):
         }
 """        
 
+
 class EgresadoSignUpForm(UserCreationForm):
+    YEARS= [x for x in range(1960,2001)]
     
-    datebirth = forms.IntegerField()
+    datebirth = forms.DateField(widget=forms.SelectDateWidget(years=YEARS))
     country = forms.CharField(max_length= "30")
+
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['first_name','last_name', 'document','address', 'city', 'phone','genre', 'email','username',]
+        fields = ['first_name','last_name', 'document','address', 'city', 'genre', 'phone', 'email','username',]
+        
 
     @transaction.atomic
     def save(self):
