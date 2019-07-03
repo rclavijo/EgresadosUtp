@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Egresado, Administrador, User
+from .models import Egresado,  User
 # Register your models here.
 
 class EgresadoAdmin(admin.ModelAdmin):
@@ -14,5 +14,3 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 
-class AdministradorAdmin(admin.ModelAdmin):
-    readonly_fields = ('active')

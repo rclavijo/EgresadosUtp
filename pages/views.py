@@ -6,6 +6,8 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from Usuarios.decorators import egresado_required, administrador_required, superusuario_required
 
 class StaffRequiredMixin(object):
     @method_decorator(staff_member_required)
@@ -14,21 +16,22 @@ class StaffRequiredMixin(object):
 
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch')
 class pageListView(ListView):
     model = Page
     
-
+@method_decorator(login_required, name='dispatch')
 class pageDetailView(DetailView):
     model = Page
 
-@method_decorator(staff_member_required, name= 'dispatch')
+@method_decorator([login_required, administrador_required], name='dispatch')
 class PageCreate( CreateView):
     model = Page
-    fields = ['title','content','order']
+    fields = ['title','content','archive','order']
     success_url = reverse_lazy('pages:pages')
 
     
-
+@method_decorator([login_required, administrador_required], name='dispatch')
 class PageUpdate(UpdateView):
     model = Page
     fields = ['title','content','order']

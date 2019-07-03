@@ -28,11 +28,7 @@ class Egresado(models.Model):
     def __str__(self):
       return self.user.first_name
 
-class Administrador(models.Model):    
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    active = models.BooleanField(default=True)
-    def __str__(self):
-      return self.user.first_name
+
 
 
 

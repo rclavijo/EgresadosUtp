@@ -5,11 +5,13 @@ from .decorators import egresado_required, administrador_required, superusuario_
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.shortcuts import redirect
+from django.views.generic.list import ListView
 from .forms import AdmonSignUpForm, UserForm, EgresadoSignUpForm
 from .models import User, Egresado
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 from django import forms
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -37,6 +39,29 @@ class AdmonSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('pages:pages')    
+
+class SolicitudesListView(UpdateView):
+    model = Egresado
+
+class EgresadoListView(ListView):
+    model = User
+    queryset = User.objects.filter(is_Egresado=True)    
+    template_name = 'egresado_list.html'
+
+@method_decorator(login_required, name='dispatch')
+class AdmonListView(ListView):
+    model = User
+    queryset = User.objects.filter(is_Admon=True)
+    template_name = 'admon_list.html'
+
+@method_decorator([login_required, superusuario_required], name='dispatch')
+class AdmonUpdateView(UpdateView):
+    model = User
+    queryset = User.objects.filter(is_Admon=True)
+    fields = ['first_name','last_name','document','genre','phone','city','address']
+    template_name = 'admon_update_form.html'
+    def get_success_url(self):
+        return reverse_lazy('user:Administrador_editar', args = [self.object.id]) + '?ok'
 
 class UserEgresadoSignupView(CreateView):
     model = User
