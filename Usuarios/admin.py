@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Egresado,  User
+from .models import Egresado,  User, EgresadoConsulta
 # Register your models here.
 
 class EgresadoAdmin(admin.ModelAdmin):
@@ -14,3 +14,8 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 
+class EgresadoConsultaAdmin(admin.ModelAdmin):
+    list_display = ('document','programa')
+
+
+admin.site.register(EgresadoConsulta, EgresadoConsultaAdmin)

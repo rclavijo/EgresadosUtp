@@ -28,6 +28,13 @@ class Egresado(models.Model):
     def __str__(self):
       return self.user.first_name
 
+class EgresadoConsulta(models.Model):
+    active = models.BooleanField(default=True)   
+    document = models.CharField(verbose_name="Documento", unique = True, max_length = 30)
+    programa = models.TextField(verbose_name="Programa", null= True, blank= True)
+    
+    def __str__(self):
+      return self.document
 
 
 
