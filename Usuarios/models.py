@@ -14,27 +14,44 @@ class User(AbstractUser):
   document = models.CharField(verbose_name="Documento", unique = True, max_length = 30)
   address = models.TextField(verbose_name="Dirección", null= True, blank= True)
   city = models.TextField(verbose_name="Ciudad", null= True, blank= True)
-  genre = models.CharField(verbose_name="Genero", null= True, blank= True, max_length = 30, choices=GENRE_CHOICES)
+  gender = models.CharField(verbose_name="Genero", null= True, blank= True, max_length = 30, choices=GENRE_CHOICES)
   phone = models.IntegerField(verbose_name="Telefono", null= True, blank= True)
+  created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+  updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
- 
+
+class Interests(models.Model):
+	name = models.CharField(max_length=50)
+
+	def __str__(self):
+		return self.name 
 
 class Egresado(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    active = models.BooleanField(default=True)   
-    country = models.TextField(verbose_name="Pais", null= True, blank= True) 
-    datebirth = models.DateField(verbose_name="Fecha De Nacimiento", null= True, blank= True)
+  VALIDATE_CHOICES = [
+    ('validado', 'Validado'),
+    ('Espera', 'Espera'),
+    ('Rechazado', 'Rechazado'),
+  ] 
+  user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+  active = models.BooleanField(default=True)   
+  country = models.TextField(verbose_name="Pais", null= True, blank= True)
+  validate = models.CharField(verbose_name="Validación",  max_length = 30, choices=VALIDATE_CHOICES,default = 'Espera')
+  datebirth = models.DateField(verbose_name="Fecha De Nacimiento", null= True, blank= True)
+  interests = models.ManyToManyField(Interests, blank=True)
+  created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+  updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     
-    def __str__(self):
-      return self.user.first_name
+  def __str__(self):
+    return self.user.first_name
 
 class EgresadoConsulta(models.Model):
-    active = models.BooleanField(default=True)   
-    document = models.CharField(verbose_name="Documento", unique = True, max_length = 30)
-    programa = models.TextField(verbose_name="Programa", null= True, blank= True)
+  active = models.BooleanField(default=True)   
+  document = models.CharField(verbose_name="Documento", unique = True, max_length = 30)
+  programa = models.TextField(verbose_name="Programa", null= True, blank= True)
+
     
-    def __str__(self):
-      return self.document
+  def __str__(self):
+    return self.document
 
 
 

@@ -1,10 +1,11 @@
 from django import forms
-from .models import Page
+from .models import Page, Interests
 
-class PageForm(forms.ModelForm):
+class PageCreationForm(forms.ModelForm):
+    content = forms.CharField(widget=FroalaEditor)
+    interests = forms.ModelMultipleChoiceField(queryset=Interests.objects.all(), widget=forms.CheckboxSelectMultiple())
     class Meta:
         model =Page
-        fields = ('title', 'content', 'archive')
-        widgets = {
-            'archive': CustomClearableFileInput
-        }
+        fields = ('title', 'content', 'archive','interests')
+
+        

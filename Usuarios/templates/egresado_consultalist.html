@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Egresados{% endblock %}
+{% block content %}
+<main role="main">
+  <div class="container mb-4">
+  <div class="row  justify-content-end mr-3">
+  <form method = 'GET' action = "{% url 'user:Egresado_consulta' %}">
+  <input type="text" name="d" placeholder = "buscar">
+  <input type="submit" class="btn btn-primary" value="Buscar">
+  </form>    
+  </div>
+      <div class="row mt-3 mx-3">
+      {% for user in EgresadosNo_list %}
+        <div class="col-md-9 mx-auto">  
+           <li>           
+            <p>{{ user.first_name }}</p> ({{user.document}})
+            <form method= 'GET' action = "{% url 'user:Egresado_consulta' %}">
+            <input type="submit" class="btn btn-primary" value="validar">
+            <input type="submit" class="btn btn-primary" value="Rechazar">
+            </form>    
+          </li>  
+          </div>
+            {% endfor %}
+          {% for user in EgresadosEncontrados_list %}
+          <div class="col-md-9 mx-auto">
+           <li>         
+           <h3> SISAS ESTE SI </H3>  
+            <p>{{ user.first_name }}</p> ({{user.document}})
+            <form method= 'GET' action = "{% url 'user:Egresado_consulta' %}">
+            <input type="submit" class="btn btn-primary" value="validar">
+            <input type="submit" class="btn btn-primary" value="Rechazar">
+            </form> 
+          </li>    
+          </div>
+          {% endfor %}                
+          </div>        
+      </div>      
+  
+              
+              
+    
+  </div>
+</main>
+{% endblock %}

@@ -9,8 +9,8 @@
         <h2 class="section-heading mb-4">{{page.title}}</h2>
         <div>
           {{page.content|safe}}
-          {% if request.user.is_staff %}
-            <p><a href="#">Editar</a></p>
+          {% if request.user.is_Admin %}
+            <p><a href=" {% url 'pages:update' page.id   %}">Editar</a></p>
           {% endif %}
         </div>
       </div>

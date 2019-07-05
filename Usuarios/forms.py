@@ -4,6 +4,7 @@ from django.db import transaction
 from .models import Egresado, User
 from django.forms import ModelForm
 
+
 """
 class CustomUserCreationForm(UserCreationForm):
 
@@ -37,7 +38,7 @@ class EgresadoSignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['first_name','last_name', 'document','address', 'city', 'genre', 'phone', 'email','username',]
+        fields = ['first_name','last_name', 'document','address', 'city', 'gender', 'phone', 'email','username',]
         
 
     @transaction.atomic
@@ -59,7 +60,7 @@ class AdmonSignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['first_name','last_name', 'document','address', 'city', 'phone','genre', 'email','username',]
+        fields = ['first_name','last_name', 'document','address', 'city', 'phone','gender', 'email','username',]
 
     @transaction.atomic
     def save(self):

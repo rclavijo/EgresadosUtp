@@ -7,8 +7,7 @@
   <div class="container mb-4">
     {% for page in page_list|dictsort:"id" reversed %}
       <div class="row mt-3">
-        <div class="col-md-9 mx-auto">  
-           <h2> esto que {{user.first_name}} ash puta vida </H2>         
+        <div class="col-md-9 mx-auto">      
           <h2 class="mb-4">{{page.title}} </h2>
           <div>
             <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>

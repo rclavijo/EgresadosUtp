@@ -4,11 +4,15 @@
 {% block content %}
 <main role="main">
   <div class="container mb-4">
+  <form method = 'GET' action = "{% url 'user:Egresado_consulta' %}">
+  <input type="text" name="d" placeholder = "buscar">
+  <input type="submit" class="btn btn-primary" value="Buscar">
+  </form>
     {% for user in user_list %}
       <div class="row mt-3">
         <div class="col-md-9 mx-auto">  
            <li>
-            <p>{{ egresado.country }}</p> ({{user.document}})
+            <p>{{ user.egresado.country }}</p> ({{user.document}})
             <a href="{% url 'user:Administrador_editar' user.id  %}"> Editar </a>
           </li>                
           </div>
