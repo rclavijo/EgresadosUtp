@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Iniciar sesión{% endblock %}
 {% block content %}
+<!--
 <style>.errorlist{color:red;}</style>
 <main role="main">
   <div class="container">
@@ -26,4 +27,74 @@
     </div>
   </div>
 </main>
+-->
+  <!-- login section start -->
+  
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-9 col-lg-8 mx-auto">
+                <h3 align="center" class="login-heading mb-4">Inicio de Sesión</h3>
+                <form action="" method="post">{% csrf_token %}
+                  <!-- <h3 class="mb-4">Iniciar sesión</h3>-->
+                  {% if form.non_field_errors %}
+                    <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+                  {% endif %}
+                  <p>
+                    <input type="text" name="username" autofocus maxlength="254" required
+                      id="id_username" class="form-control" placeholder="Nombre de usuario"/>
+                  </p>
+                  <p>
+                    <input type="password" name="password" required
+                      id="id_password" class="form-control" placeholder="Contraseña"/>
+                  </p>
+                  <p><input type="submit" class="btn btn-primary btn-block" value="Acceder"></p>
+                  <!-- Recordar contraseña
+                  <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">Recordar contraseña?</label>
+                  </div>-->
+                  <!-- Olvido su contraseña--> <!--Completar Falta ese template-->
+                  <div class="text-center">
+                    <a style="color:#FFFFFF" class="small" href="#">Olvido su contraseña?</a></div>
+                  </div>
+                </form>
+                <!--
+                <form>
+                  <div class="form-label-group">
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <label for="inputEmail">Correo electronico</label>
+                  </div>
+
+                  <div class="form-label-group">
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <label for="inputPassword">Contraseña</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">Recordar contraseña?</label>
+                  </div>
+                  
+                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">INICIAR</button>
+                  <div class="text-center">
+                    <a style="color:#FFFFFF" class="small" href="#">Olvido su contraseña?</a></div>
+                  </div>
+                </form>
+                -->
+              </div>
+						</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+	<!-- login section end -->
 {% endblock %}
+
+

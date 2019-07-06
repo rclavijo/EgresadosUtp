@@ -8,20 +8,25 @@
   <meta name="keywords" content="RIJTTA">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Favicon -->
-  <link href="{%  static 'core/img/Logo_UTP.ico' %}" rel="shortcut icon"/>
+  <link href="{%  static 'core/img/Logo_RIJTTA2-X64.ico' %}" rel="shortcut icon"/>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Stylesheets -->
-   
+  {%block head_content %}{% endblock %}
+
   <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}"/>
   <link rel="stylesheet" href="{% static 'core/css/font-awesome.min.css' %}"/>
   <link rel="stylesheet" href="{% static 'core/css/flaticon.css' %}"/>
   <link rel="stylesheet" href="{% static 'core/css/animate.css' %}"/>
   <link rel="stylesheet" href="{% static 'core/css/owl.carousel.css' %}"/>
-  <link rel="stylesheet" href="{% static 'core/css/style.css' %}"/>
   <link rel="stylesheet" href="{% static 'core/css/CSS.css' %}"/>
+  <link rel="stylesheet" href="{% static 'core/css/bootstrap.css' %}"/>
+  <link rel="stylesheet" href="{% static 'core/css/carousel.css' %}"/>
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}"/>
+  
+  
    
 
   <!--[if lt IE 9]>
@@ -34,15 +39,19 @@
  
 
 	<!-- Header section start -->
-	
-      <!-- Navegación -->
-      
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	    <!-- Navegación -->
+      <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top2 bg-inverse">
+      <!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">--> 
         <div class="container">
+          <a class="navbar-left" href="{% url 'home' %}"><img src="{% static 'core/img/logo/Logo_Egresados_3.png' %}"></a>
           {% if  request.user.is_Egresado %}
-          <a class="navbar-brand" href="{% url 'home' %}">Egresados UTP Logueado {{Egresado.country}}</a>
+          <a class="navbar-brand" href="{% url 'home' %}">&nbsp{{user.first_name}}</a>
+          {% elif  request.user.is_Admon %}
+          <a class="navbar-brand" href="{% url 'home' %}">&nbsp Administrador:&nbsp{{user.first_name}}</a>
+          {% elif  request.user.is_staff %}
+          <a class="navbar-brand" href="{% url 'home' %}">&nbsp&nbsp Super Usuario</a>
           {% else %}
-          <a class="navbar-brand" href="{% url 'home' %}">Egresados UTP </a>
+          <!-- <a class="navbar-brand" href="{% url 'home' %}">Egresados UTP </a> -->
           {% endif %}
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ned" aria-controls="ned" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
@@ -73,10 +82,12 @@
               </li>
               {% else %} 
               {% if request.user.is_staff %}
+              
                <li class="nav-item">
                 <a class="nav-link" href="{% url 'user:Administrador_signup' %}">           
                 Registrar Administrador</a>
               </li>   
+              
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'user:Administrador_consulta' %}">           
                 Consultar Administrador</a>
@@ -99,6 +110,7 @@
           </div>
         </div>
       </nav>
+    
      
       <!-- Contenido -->
       <div class="container">
@@ -108,15 +120,20 @@
       {% endblock %}
       </div>
 
-      <!-- FOOTER -->
+      
+
+      <!-- Footer section start -->
       <footer class="footer-section spad">
-        <div class="container text-center">
-          <h2>Hola Egresados!</h2>
-          <h4 class="hs-des">Esta Plataforma web es una herramienta que les permitira unirse más con la Universidad, accediendo asi a la información sobre las noticias y eventos que la Universidad tiene para ustedes, de una manera fácil y efectiva.</h4>
-          </br>
-          Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados RIJTTA
-        </div>
-	    </footer>
+          <div class="container text-center">
+            <h2 class="texto-borde3">Hola Egresados!</h2>
+            <h4 class="hs-des">Esta Plataforma web es una herramienta que les permitira unirse más con la Universidad, accediendo asi a la información sobre las noticias y eventos que la Universidad tiene para ustedes, de una manera fácil y efectiva.</h4>
+      
+            </br>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados RIJTTA
+          </div>
+          </div>
+      </footer>
+      <!-- Footer section end -->
+
       <!-- Javascript -->
       <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -129,5 +146,8 @@
       <script src="{% static 'core/js/main.js' %}"></script>
       <script src="{% static 'core/js/jquery.slim.js' %}"></script>
       <script src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+      <!-- -->
+      
+      {%block scripts %}{% endblock %}
   </body>
 </html>
