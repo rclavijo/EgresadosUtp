@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Egresados{% endblock %}
+{% block content %}
+<main role="main">
+  <div class="container mb-4">
+    <div class="row  justify-content-end mr-3 my-2">
+      <form method = 'GET' action = "{% url 'user:Egresado_consulta' %}">
+        <input type="text" name="d" placeholder = "buscar">
+        <input type="submit" class="btn btn-primary" value="Buscar">
+      </form>    
+    </div>
+    <div class="row mt-3 mx-3">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Encontrado</th>
+            <th scope="col">Validar</th>
+            <th scope="col">Rechazar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in EgresadosNo_list %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{ user.first_name }}</td>
+            <td>{{user.document}}</td>
+            {% if user in EgresadosEncontrados_list %}
+              <td><i class="fas fa-check-circle"></i></td>
+            {% else %}
+              <td><i class="fas fa-ban"></i></td>
+            {% endif %}
+            <td>
+              <form method="post" action="{% url 'user:Egresadovalidado' user.id %}">{% csrf_token %}          
+                  <input class="btn btn-success" type="submit"   id="submit-auth-btn" name="authorize_user" value="Validar">
+              </form></td>
+            <td>
+              <form method="post"  action="{% url 'user:Egresado_delete' user.id %}" id= "eliminar">{% csrf_token %}              
+                <input onclick="deauthorizeUser({{ user.id }})"  class="btn btn-danger" type="submit" id="submit-noauth-btn"   name="deauthorize_user" value = "Rechazar">
+              </form></td>
+              <!-- Modal -->
+<div class="modal fade" id="modalDeauthorizeUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+    </div>     
+  </div>    
+
+
+
+
+  
+
+
+          
+    
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  function authorizeUser(id_user) {    
+    $("#id_user-auth").val(id_user);
+    $("#modalAuthorizeUser").modal('show');
+    
+  }
+  function deauthorizeUser(id_user) {
+    $("#id_user-noauth").val(id_user);
+    $("#modalDeauthorizeUser").modal('show');
+  }
+</script>
+{% endblock %}

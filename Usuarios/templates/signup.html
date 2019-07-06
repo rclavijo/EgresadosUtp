@@ -4,21 +4,21 @@
 {% block content %}
 <style>.errorlist{color:red;} label{display:none}</style>
 <main role="main">
-<div class="container">
-<form action="" method="post">{% csrf_token %}   
-    <div class="row ">                
-        <h3 class="mb-4">Registro Egresados UTP</h3>          
+<div class="col-md-9 mx-auto mb-5">
+<form action="" method="post"> {% csrf_token %}
+<h2 class="sub-title">BIENVENDIO AL PROCESO DE REGISTRO</h2><br><br>                     
               {% for field in form %}
-              <div class= "col-md-8 col-md-offset-2">
+    <div class= "col-md-8 col-md-offset-2">
             <div class="form-group">
-              {{field.label}}
+              {{field.errors}}
+              {{field.label}} : 
               {{field}}
             </div>  
             </div>             
            {% endfor %}                        
-      </div>
       <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
-      </form>
-      </div>
+    </form>
+    </div>
 </main>
+
 {% endblock %}

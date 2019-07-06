@@ -1,18 +1,27 @@
 from django.contrib import admin
-from .models import Egresado, Administrador, User
+from .models import Egresado,  User, EgresadoConsulta, Interests
 # Register your models here.
 
 class EgresadoAdmin(admin.ModelAdmin):
-    readonly_fields = ('country','datebirth')
+    list_display = ('country','datebirth')
 
 
 admin.site.register(Egresado, EgresadoAdmin)
 
 class UserAdmin(admin.ModelAdmin):
-    readonly_fields = ('username','first_name','last_name' , 'is_Admon')
+    list_display = ('username','first_name','last_name' , 'is_Admon', 'validate')
 
 
 admin.site.register(User, UserAdmin)
 
-class AdministradorAdmin(admin.ModelAdmin):
-    readonly_fields = ('active')
+class EgresadoConsultaAdmin(admin.ModelAdmin):
+    list_display = ('document','programa')
+
+
+admin.site.register(EgresadoConsulta, EgresadoConsultaAdmin)
+
+class InterestsAdmin(admin.ModelAdmin):
+    display = ('name')
+
+
+admin.site.register(Interests, InterestsAdmin)

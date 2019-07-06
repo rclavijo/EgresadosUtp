@@ -1,16 +1,19 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from Usuarios.models import Interests
+from froala_editor.fields import FroalaField
 
 def custom_uptload_to(instance, filename):
-    old_instance = Profile.objects.get(pk=instance.pk)
+    old_instance = Page.objects.get(pk=instance.pk)
     old_instance.imagen.delete()
     return 'pages/' + filename
 
 class Page(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200)
-    content = RichTextField(verbose_name="Contenido")
-    imagen = models.ImageField(upload_to=custom_uptload_to, null = True, blank=True)
+    content = FroalaField()
+    archive = models.ImageField(upload_to="media/", null=True, blank=True)
     order = models.SmallIntegerField(verbose_name="Orden", default=0)
+    interests = models.ManyToManyField(Interests, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 

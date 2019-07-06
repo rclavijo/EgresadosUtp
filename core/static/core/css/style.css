@@ -13,9 +13,21 @@ html,
 body {
 	height: 100%;
 	font-family: 'Open Sans', sans-serif;
+	background-image: url(../img/fondo.png);
+	background-repeat: no-repeat;
+	background-attachment: fixed; 
+	background-position: center center;
+	background-size: cover;
 }
 
-h1,
+
+h1{
+	color: #ffff;
+	margin: 0;
+	font-weight: 600;
+	font-style:oblique;
+	font-family: 'Helvetica','Verdana','Monaco',sans-serif;
+}
 h2,
 h3,
 h4{
@@ -33,7 +45,7 @@ h6 {
 }
 
 h1 {
-	font-size: 60px;
+	font-size: 70px;
 }
 
 h2 {
@@ -53,9 +65,12 @@ h5 {
 }
 
 p {
-	font-size: 14.2px;
-	color: #868686;
-	line-height: 2.2;
+	font-size: 15px;
+	color: #ffff;
+	line-height: 1;
+	font-style:oblique;
+	font-family: 'Helvetica','Verdana','Monaco',sans-serif;
+	
 }
 
 img {
@@ -519,6 +534,87 @@ ol {
 	padding-bottom: 20px;
 }
 
+/* Sombra chidori*/
+.section-chidori{
+	/*background: color #127bab;
+	box-shadow: 0px 0px 30px blue;
+	box-shadow: 0px 20px 10px #6C757D;
+	box-shadow: 0px 20px 0px #6C757D;*/
+	box-shadow: 0px 20px 0px #F8F9FA;
+}
+/* ================= */
+
+/* Boton personalizado 2*/
+.boton_personalizado2{
+	text-decoration: none;
+	padding: 10px;
+	font-weight: 600;
+	font-size: 20px;
+	color: #ffffff;
+	background-color: #69a74e;
+	border-radius: 6px;
+	border: 1px solid #757575;
+  }
+  .boton_personalizado2:hover{
+	color: #ffffff;
+	background-color: #255013;
+  }
+
+/* ====================*/
+
+/* Colores para los div */
+#estilo1{
+	color:rgb(211, 32, 32);
+	
+}
+
+#estilo2{
+	color:red;
+	background:blue;
+}
+
+.texto-borde {
+	-webkit-text-stroke: 2px black;
+	 
+}
+
+.texto-borde2 {
+	-webkit-text-stroke: 0.35px black;
+}
+
+/* ------------ */
+.texto-encima{
+	-webkit-text-stroke: 2px black; /*Texto borde*/
+	position: absolute;
+	top: 180px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.texto-encima2{
+	-webkit-text-stroke: 0.35px black; /*Texto borde*/
+	position: absolute;
+	top: 255px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.texto-encima3{
+	-webkit-text-stroke: 2px black; /*Texto borde*/
+	position: absolute;
+	top: 230px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+/* ------------- */
+
+.texto-borde3 {
+	-webkit-text-stroke: 1.5px black;
+	 
+}
 .site-logo {
 	padding-top: 5px;
 	color: #fff;
@@ -771,6 +867,10 @@ ol {
 	float: left;
 	display: block;
 	background-position: center center;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
 }
 
 .single-portfolio.sm-wide {
@@ -1010,13 +1110,14 @@ ol {
 ----------------------*/
 .footer-section {
 	background: #127bab;
+	
 }
 
 .footer-section h2 {
 	color: #fff;
 	font-weight: 400;
 	font-style: italic;
-	margin-bottom: 20px;
+	margin-bottom: 80px;
 }
 
 .footer-section p {

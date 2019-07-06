@@ -1,20 +1,30 @@
-{% if request.user.is_staff %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <span class="navbar-brand" href="#"><i>Administrar</i></span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nep" aria-controls="nep" aria-expanded="false">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nep">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'pages:create' %}"><i>Crear Noticia</i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'pages:pages' %}"><i>Listar Noticia</i></a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+{% load static %}
+{% if request.user.is_Admon %}
+<div class="container p-0">
+    <h2><br></h2>
+    <h2 class="texto-borde">
+    <img src="{% static 'core/img/login/man.png' %}" width="50" height="50" align="left"> &nbsp {{user.first_name}}
+    </h2>
+    <h4><br></h4>
+</div>
+   <nav class="navbar navbar-expand-lg navbar-light bg-info section-chidori">
+      <div class="container">
+        <span class="navbar-brand" href="#"><i>Administrar Noticias</i></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nep" aria-controls="nep" aria-expanded="false">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nep">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'pages:create' %}"><i><b>Crear Noticia</b></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'pages:pages' %}"><i><b>Listar Noticia</b></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
 {% endif %}
+
