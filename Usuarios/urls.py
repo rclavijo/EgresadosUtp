@@ -1,6 +1,6 @@
 from django.urls import include, path, re_path
 from django.contrib.auth.views import LoginView, logout, password_reset, password_reset_done , password_reset_confirm, password_reset_complete
-from .views import AdmonSignUpView, EgresadoListpview, egresadovalidado, EgresadoDeleteView, SignInView, UserEgresadoSignupView, AdmonListView, AdmonUpdateView, EgresadoListView, EgresadoConsultaListView
+from .views import AdmonSignUpView,  egresadovalidado, EgresadoDeleteView, SignInView, UserEgresadoSignupView, AdmonListView, AdmonUpdateView, EgresadoListView, EgresadoConsultaListView
 from django.contrib import auth
 from django.urls import reverse, reverse_lazy
 

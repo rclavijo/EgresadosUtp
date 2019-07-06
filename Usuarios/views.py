@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
-from .forms import AdmonSignUpForm, UserForm, EgresadoSignUpForm
+from .forms import AdmonSignUpForm, UserForm, EgresadoSignUpForm, UserUpdateForm
 from .models import User, Egresado , EgresadoConsulta 
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView, password_reset, password_reset_done , password_reset_confirm, password_reset_complete
@@ -57,14 +57,16 @@ class AdmonSignUpView(CreateView):
         send_mail('registration/Adminpassword.tpl', {}, 'proyectolabsw2019@gmail.com',
                      [correo],subject= 'Creación Cuenta')  
         return redirect('pages:pages')    
-
+@method_decorator([login_required, administrador_required], name='dispatch')
 class EgresadoValidadoView(UpdateView):
     model = Egresado
     success_url = reverse_lazy('user:Egresado_validate')
     fields = ['validate']
     
-    
+
+@login_required    
 def egresadovalidado(request, id_usuario):
+
     user = get_object_or_404(User, pk = id_usuario)
     egresado = get_object_or_404(Egresado, user_id = id_usuario)
     if request.method == 'POST' and 'authorize_user' in request.POST:
@@ -84,7 +86,7 @@ def egresadovalidado(request, id_usuario):
     else:
         return render(request, 'egresado_consultalist1.html')
       
-        
+@method_decorator([login_required, administrador_required], name='dispatch')        
 class EgresadoListView(ListView):
     model = User   
     def get_queryset(self):
@@ -95,47 +97,13 @@ class EgresadoListView(ListView):
             return User.objects.filter(is_Egresado=True)              
     template_name = 'egresado_list.html'
 
+@method_decorator([login_required, administrador_required], name='dispatch')
 class EgresadoDeleteView(DeleteView):
     model = User
     success_url = reverse_lazy('user:Egresado_validate')
 
 
-##prueba con vista en funciones
-
-def EgresadoListpview(request):
-    model = User
-
-    if request.method == 'POST' and 'authorize_user' in request.POST:
-        id_user = request.POST.get('id_user')
-        user = User.objects.filter(pk = id_user)
-        programa = EgresadoConsulta.objects.filter(document = User.document)
-        if user.count() > 0:
-            user = user[0]    
-            egresado = Egresado.objects.filter(user  =  user)        
-            egresado = egresado [0]
-            egresado.update(validate =True)
-            
-
-    if request.method == 'POST' and 'deauthorize_user' in request.POST:
-        id_user = request.POST.get('id_user')
-        user = User.objects.filter(pk=id_user)
-        if user.count() != 0:
-            User.activo = False
-            User.save()
-
-    query = EgresadoConsulta.objects.values_list('document')
-    EgresadosNo_list = User.objects.filter(is_Egresado=True)
-    EgresadosEncontrados_list = User.objects.filter(Q(is_Egresado=True) & Q(document__in=query))
-
-    template = get_template('egresado_consultalist.html')
-    ctx = {
-        'EgresadosNo_list': EgresadosNo_list,
-        'EgresadosEncontrados_list': EgresadosEncontrados_list
-    }
-
-    return HttpResponse(template.render(ctx, request))
-
-
+@method_decorator([login_required, administrador_required], name='dispatch')
 class EgresadoConsultaListView(ListView):
     model = User
     query = EgresadoConsulta.objects.values_list('document')  
@@ -148,20 +116,25 @@ class EgresadoConsultaListView(ListView):
         return context                      
     template_name = 'egresado_Consultalist1.html'
     
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, superusuario_required], name='dispatch')
 class AdmonListView(ListView):
-    model = User    
-    queryset = User.objects.filter(is_Admon=True)
+    model = User
+    def get_queryset(self):
+        query = self.request.GET.get("d", None)        
+        if query is not None:
+            return User.objects.filter(Q(is_Admon=True) & Q(document = query))
+        else:
+            return User.objects.filter(is_Admon=True)                  
     template_name = 'admon_list.html'
 
 @method_decorator([login_required, superusuario_required], name='dispatch')
 class AdmonUpdateView(UpdateView):
     model = User
-    queryset = User.objects.filter(is_Admon=True)
-    fields = ['first_name','last_name','document','gender','phone','city','address']
+    form_class = UserUpdateForm
+    queryset = User.objects.filter(is_Admon = True)
     template_name = 'admon_update_form.html'
-    def get_success_url(self):
-        return reverse_lazy('user:Administrador_editar', args = [self.object.id]) + '?ok'
+    def get_success_url(self):        
+        return reverse_lazy('user:Administrador_editar', args = [self.object.id])
 
 class UserEgresadoSignupView(CreateView):
     model = User
