@@ -11,35 +11,68 @@
   </form>    
   </div>
       <div class="row mt-3 mx-3">
-      {% for user in EgresadosNo_list %}
+      {% for user in EgresadosNo_list %}       
         <div class="col-md-9 mx-auto">  
-           <li>           
-            <p>{{ user.first_name }}</p> ({{user.document}})
-            <form method= 'GET' action = "{% url 'user:Egresado_consulta' %}">
-            <input type="submit" class="btn btn-primary" value="validar">
-            <input type="submit" class="btn btn-primary" value="Rechazar">
-            </form>    
-          </li>  
-          </div>
-            {% endfor %}
-          {% for user in EgresadosEncontrados_list %}
-          <div class="col-md-9 mx-auto">
-           <li>         
-           <h3> SISAS ESTE SI </H3>  
-            <p>{{ user.first_name }}</p> ({{user.document}})
-            <form method= 'GET' action = "{% url 'user:Egresado_consulta' %}">
-            <input type="submit" class="btn btn-primary" value="validar">
-            <input type="submit" class="btn btn-primary" value="Rechazar">
-            </form> 
-          </li>    
-          </div>
-          {% endfor %}                
+           <li>    
+            {% if user in EgresadosEncontrados_list %}
+                <p> sisas</p>
+            {% endif %}       
+            <p>{{ user.first_name }}</p> ({{user.document}})                      
+            <span class="badge badge-danger badge-pill" onclick="authorizeUser({{ user.id }})">Validar Usuario</span>
+            <span class="badge badge-success badge-pill" onclick="deauthorizeUser({{ user.id }})">Rechazar Usuario</span>
+            </li>  
           </div>        
-      </div>      
-  
-              
-              
-    
+          {% endfor %}            
+           <div class="modal fade" id="modalAuthorizeUser" tabindex="-1" role="dialog" aria-labelledby="modalAuthorizeUserLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAuthorizeUserLabel">Autorizar acceso</h5>
+      </div>
+      <div class="modal-body">
+        ¿Deseas autorizar el acceso a este usuario?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="$('#submit-auth-btn').trigger('click')" class="btn btn-success">Autorizar</button>
+      </div>
+    </div>
   </div>
-</main>
+</div>
+
+<div class="modal fade" id="modalDeauthorizeUser" tabindex="-1" role="dialog" aria-labelledby="modalDeauthorizeUserLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDeauthorizeUserLabel">Remover acceso</h5>
+      </div>
+      <div class="modal-body">
+        ¿Deseas remover el acceso de este usuario?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="$('#submit-noauth-btn').trigger('click')" class="btn btn-danger">Remover</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form method="post" hidden>{% csrf_token %}
+  <input type="text" id="id_profile-noauth" name="id_profile">
+  <input type="submit" id="submit-noauth-btn" name="deauthorize_user">
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  function authorizeUser(id_user) {
+    $("#id_profile-auth").val(id_user);
+    $("#modalAuthorizeUser").modal('show');
+  }
+  function deauthorizeUser(id_user) {
+    $("#id_profile-noauth").val(id_user);
+    $("#modalDeauthorizeUser").modal('show');
+  }
+</script>
 {% endblock %}

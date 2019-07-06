@@ -16,6 +16,7 @@ class User(AbstractUser):
   city = models.TextField(verbose_name="Ciudad", null= True, blank= True)
   gender = models.CharField(verbose_name="Genero", null= True, blank= True, max_length = 30, choices=GENRE_CHOICES)
   phone = models.IntegerField(verbose_name="Telefono", null= True, blank= True)
+  validate = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
   updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
@@ -34,8 +35,7 @@ class Egresado(models.Model):
   ] 
   user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
   active = models.BooleanField(default=True)   
-  country = models.TextField(verbose_name="Pais", null= True, blank= True)
-  validate = models.CharField(verbose_name="Validación",  max_length = 30, choices=VALIDATE_CHOICES,default = 'Espera')
+  country = models.TextField(verbose_name="Pais", null= True, blank= True)  
   datebirth = models.DateField(verbose_name="Fecha De Nacimiento", null= True, blank= True)
   interests = models.ManyToManyField(Interests, blank=True)
   created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")

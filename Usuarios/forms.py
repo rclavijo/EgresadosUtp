@@ -45,6 +45,7 @@ class EgresadoSignUpForm(UserCreationForm):
     def save(self):
         data = self.cleaned_data
         user = super().save(commit=False)
+        user.validate = False
         user.is_Egresado = True
         user.save()
         egresado = Egresado.objects.create( user = user,
@@ -56,6 +57,7 @@ class EgresadoSignUpForm(UserCreationForm):
     
         return user
 
+        
 class AdmonSignUpForm(UserCreationForm):    
 
     class Meta(UserCreationForm.Meta):

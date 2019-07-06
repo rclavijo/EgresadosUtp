@@ -1,6 +1,6 @@
 from django.urls import include, path, re_path
 from django.contrib.auth.views import LoginView, logout, password_reset, password_reset_done , password_reset_confirm, password_reset_complete
-from .views import AdmonSignUpView,  SignInView, UserEgresadoSignupView, AdmonListView, AdmonUpdateView, EgresadoListView, EgresadoConsultaListView
+from .views import AdmonSignUpView, EgresadoListpview, egresadovalidado, EgresadoDeleteView, SignInView, UserEgresadoSignupView, AdmonListView, AdmonUpdateView, EgresadoListView, EgresadoConsultaListView
 from django.contrib import auth
 from django.urls import reverse, reverse_lazy
 
@@ -25,6 +25,9 @@ user_patterns = ([
     path('registro/Egresado/',UserEgresadoSignupView.as_view(), name='Egresado_signup'),
     path('consulta/Egresado/',EgresadoListView.as_view(), name='Egresado_consulta'),
     path('validad/Egresado/',EgresadoConsultaListView.as_view(), name='Egresado_validate'),
+    #path('validar/Egresado/',EgresadoListpview, name='Egresado_validate'),
+    re_path(r'^egresadovalidad/(?P<id_usuario>\d+)/$',egresadovalidado, name='Egresadovalidado'),
+    path('Eliminar/Egresado/<int:pk>',EgresadoDeleteView.as_view(), name='Egresado_delete'),
     path('registro/Administrador/',AdmonSignUpView.as_view(), name='Administrador_signup'),
     path('consulta/Administrador/',AdmonListView.as_view(), name='Administrador_consulta'),
     path('editar/Administrador/<int:pk>/',AdmonUpdateView.as_view(), name='Administrador_editar'),

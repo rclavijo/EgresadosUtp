@@ -9,7 +9,7 @@ class EgresadoAdmin(admin.ModelAdmin):
 admin.site.register(Egresado, EgresadoAdmin)
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username','first_name','last_name' , 'is_Admon')
+    list_display = ('username','first_name','last_name' , 'is_Admon', 'validate')
 
 
 admin.site.register(User, UserAdmin)
