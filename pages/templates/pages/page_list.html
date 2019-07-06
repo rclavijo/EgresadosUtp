@@ -32,6 +32,15 @@
       </nav>
     
   {% endif %}
+  {% if request.user.validate == False %}
+  
+  <div class="container bg-light">
+  <br>
+  <h2> Usuario Esta siendo verificado, por favor espere confirmación </h2>
+  <br>
+  </div>
+  
+  {% else %}
   <div class="container mb-4 bg-light">
     {% for page in page_list|dictsort:"id" reversed %}
       <div class="row mt-3">
@@ -54,4 +63,5 @@
     {% endfor %}
   </div>
 </main>
+{% endif %}
 {% endblock %}
