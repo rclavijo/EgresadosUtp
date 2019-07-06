@@ -10,16 +10,16 @@
         <div class="col-md-9 mx-auto">      
           <h2 class="mb-4">{{page.title}} </h2>
           <div>
+          <div class="col-md-2">
+            {% if page.archive %}
+                <img src="{{page.archive.url}}" class="img-fluid">
+                {%else %}
+                <img src="{% static 'pages/img/descarga.png' %}" class="img-fluid">
+              {% endif %}
+              </div>
             <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>
             <p><a href="{% url 'pages:page' page.id page.title|slugify %}">Leer más</a>
-              <!--
-              {% if request.user.is_staff %}
-                | <a href="{% url 'pages:update' page.id %}">Editar</a>
-                | <a href="#">Borrar</a>
-              {% endif %}
-              -->
-            </p>
-              
+            </p>              
           </div>
         </div>        
       </div>      

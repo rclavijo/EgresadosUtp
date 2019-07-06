@@ -1,6 +1,12 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MinLengthValidator
  
+def custom_uptload_to(instance, filename):
+    old_instance = Profile.objects.get(pk=instance.pk)
+    old_instance.avatar.delete()
+    return 'profiles/' + filename
+
 
 class User(AbstractUser):
 
@@ -12,8 +18,8 @@ class User(AbstractUser):
   is_Admon = models.BooleanField(default=False)
   is_Egresado = models.BooleanField(default=False)
   document = models.CharField(verbose_name="Documento", unique = True, max_length = 30)
-  address = models.TextField(verbose_name="Dirección", null= True, blank= True)
-  city = models.TextField(verbose_name="Ciudad", null= True, blank= True)
+  address = models.CharField(verbose_name="Dirección", max_length=20, validators=[MinLengthValidator(7)], null= True, blank= True)
+  city = models.CharField(verbose_name="Ciudad", max_length=20, validators=[MinLengthValidator(7)], null= True, blank= True)
   gender = models.CharField(verbose_name="Genero", null= True, blank= True, max_length = 30, choices=GENRE_CHOICES)
   phone = models.IntegerField(verbose_name="Telefono", null= True, blank= True)
   validate = models.BooleanField(default=True)
@@ -43,6 +49,12 @@ class Egresado(models.Model):
     
   def __str__(self):
     return self.user.first_name
+    
+class Profile(models.Model):
+    User = models.OneToOneField(User , on_delete = models.CASCADE)
+    avatar = models.ImageField(upload_to=custom_uptload_to, null = True, blank=True)
+    bio = models.TextField(null = True, blank=True)
+    link = models.URLField(max_length=200,null = True, blank=True)
 
 class EgresadoConsulta(models.Model):
   active = models.BooleanField(default=True)   
