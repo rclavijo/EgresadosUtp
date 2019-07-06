@@ -4,11 +4,38 @@
 {% block content %}
 {% include 'pages/includes/pages_menu.html'%}
 <main role="main">
-  <div class="container mb-4">
+  {% if  request.user.is_Egresado %}
+    
+    <!-- Inicio logo de egresado y nombre para el perfil-->
+    <div class="container p-0">
+      <h2><br></h2>
+      <h2 class="texto-borde">
+      <img src="{% static 'core/img/registro/egresado_genero/hombre-egresado.png' %}" width="50" height="50" align="left"> &nbsp {{user.first_name}}
+      </h2>
+      <h4><br></h4>
+    </div>
+    <!-- Fin logo de egresado y nombre para el perfil-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-info section-chidori">
+        <div class="container">
+          <span class="navbar-brand" href="#"><i>Noticias</i></span>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nep" aria-controls="nep" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="nep">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:pages' %}"><i><b>Lista de Noticias</b></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+  {% endif %}
+  <div class="container mb-4 bg-light">
     {% for page in page_list|dictsort:"id" reversed %}
       <div class="row mt-3">
-        <div class="col-md-9 mx-auto">  
-           <h2> esto que {{user.first_name}} ash puta vida </H2>         
+        <div class="col-md-9 mx-auto">      
           <h2 class="mb-4">{{page.title}} </h2>
           <div>
             <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>

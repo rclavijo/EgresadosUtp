@@ -87,7 +87,7 @@
 </div>
   <!-- ================= -->
 {% elif  request.user.is_Admon %}
- <!-- Menu Super Usuario-->
+ <!-- Menu Usuario Administrador-->
   <div class="container p-0">
     <h2><br></h2>
     <h2 class="texto-borde">
@@ -132,13 +132,13 @@
                     </h4><br>
                     <!-- Boton -->
                     <h4 align="center">
-                      <a class="boton_personalizado2" href="#">Validar Egresados</a>
+                      <a class="boton_personalizado2" href="{% url 'user:Egresado_validate' %}">Validar Egresados</a>
                     </h4><br>
                 <!-- Fin Validar Egresados -->   
 
             <!-- Inicio Consultar Egresados -->
                 <div class="card-header">
-                    <h5 class="card-title mb-0" align="center">Consultar Administrador</h5>
+                    <h5 class="card-title mb-0" align="center">Consultar Egresado</h5>
                 </div>
                     <!-- Imagen -->
                     <p align="center"><br> 
@@ -146,11 +146,11 @@
                       </p> 
                     <!-- Texto -->  
                     <h4 align="center">
-                      <small align="justify">&nbsp Dale en el boton para Consultar los usuarios Administradores</small>
+                      <small align="justify">&nbsp Dale en el boton para Consultar los usuarios Egresados</small>
                     </h4><br>
                     <!-- Boton -->
                     <h4 align="center">
-                      <a class="boton_personalizado2" href="{% url 'user:Egresado_consulta' %}">Consultar Administrador</a>
+                      <a class="boton_personalizado2" href="{% url 'user:Egresado_consulta' %}">Consultar Egresados</a>
                     </h4><br>
                 <!-- Fin Consultar Egresados --> 
 
@@ -182,7 +182,7 @@
   <!-- ================= -->
 
 {% elif  request.user.is_Egresado %}
-	<h1> HOME USUARIO EGRESADO </h1>
+	<!--<h1> HOME USUARIO EGRESADO </h1>-->
 	<!-- Carrusel en Bootstrap -->
     <div class="container">
         <hr><br><br><br>

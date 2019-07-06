@@ -534,6 +534,16 @@ ol {
 	padding-bottom: 20px;
 }
 
+/* Sombra chidori*/
+.section-chidori{
+	/*background: color #127bab;
+	box-shadow: 0px 0px 30px blue;
+	box-shadow: 0px 20px 10px #6C757D;
+	box-shadow: 0px 20px 0px #6C757D;*/
+	box-shadow: 0px 20px 0px #F8F9FA;
+}
+/* ================= */
+
 /* Boton personalizado 2*/
 .boton_personalizado2{
 	text-decoration: none;
