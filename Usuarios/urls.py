@@ -14,7 +14,7 @@ user_patterns = ([
                                             
                                                     },name='password_reset'),
 
-    re_path(r'^password_reset/done/$',password_reset_done, {'template_name': 'registration/password_reset_done.html'}, name='password_reset_done'),
+    re_path(r'^password_reset/done/$',password_reset_done, {'template_name': 'users/password_reset_done.html'}, name='password_reset_done'),
 
     re_path(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', password_reset_confirm,
                                                     {'template_name': 'registration/password_reset_confirm.html',

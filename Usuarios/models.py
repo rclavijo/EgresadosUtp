@@ -31,7 +31,8 @@ class Interests(models.Model):
 	name = models.CharField(max_length=50)
 
 	def __str__(self):
-		return self.name 
+		return self.name
+    
 
 class Egresado(models.Model):
   VALIDATE_CHOICES = [
@@ -43,7 +44,7 @@ class Egresado(models.Model):
   active = models.BooleanField(default=True)   
   country = models.TextField(verbose_name="Pais", null= True, blank= True)  
   datebirth = models.DateField(verbose_name="Fecha De Nacimiento", null= True, blank= True)
-  interests = models.ManyToManyField(Interests, blank=True)
+  interests = models.ManyToManyField(Interests, blank=True, related_name='interested_egresados')
   created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
   updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     

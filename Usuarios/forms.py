@@ -31,7 +31,6 @@ class UserForm(UserCreationForm):
 
 class EgresadoSignUpForm(UserCreationForm):
     YEARS= [x for x in range(1960,2001)]
-    
     datebirth = forms.DateField( label= "fecha de nacimiento", widget=forms.SelectDateWidget(years=YEARS))
     country = forms.CharField(label= "País",max_length= "30")
     email = forms.EmailField(required = True,  label = 'email',help_text = "Requerido, 254 caracteres como máximo y debe ser válido")
