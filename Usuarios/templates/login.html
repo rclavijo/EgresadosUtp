@@ -30,7 +30,7 @@
 </main>
 -->
   <!-- login section start -->
-  
+
   <div class="container-fluid">
     <div class="row no-gutter">
       <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
@@ -50,7 +50,7 @@
                       id="id_username" class="form-control" placeholder="Nombre de usuario"/>
                   </p>
                   <p>
-                    <input type="password" name="password" required
+                    <input type="password" name="password" minlength="11" required
                       id="id_password" class="form-control" placeholder="Contraseña"/>
                   </p>
                   <p><input type="submit" class="btn btn-primary btn-block" value="Acceder"></p>
@@ -80,7 +80,7 @@
                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                     <label class="custom-control-label" for="customCheck1">Recordar contraseña?</label>
                   </div>
-                  
+
                   <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">INICIAR</button>
                   <div class="text-center">
                     <a style="color:#FFFFFF" class="small" href="#">Olvido su contraseña?</a></div>
@@ -94,7 +94,7 @@
       </div>
     </div>
   </div>
-  
+
 	<!-- login section end -->
 {% endblock %}
 

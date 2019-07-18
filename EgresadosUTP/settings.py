@@ -25,7 +25,7 @@ SECRET_KEY = 'm7(5$s8jqfyv75++s!sqms#8az+!x02u$$=7h-x(qf+=0on$)a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['egresados.pythonanywhere.com']
 
 
 # Application definition
@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'core',
     'pages.apps.PagesConfig',
     'mail_templated',
-    
-    
+
+
 ]
 
 MIDDLEWARE = [
@@ -139,6 +139,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 EMAIL_USE_TLS = True
 EMAIL_HOST =  'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'proyectolabsw2019@gmail.com'  
+EMAIL_HOST_USER = 'proyectolabsw2019@gmail.com'
 EMAIL_HOST_PASSWORD = 'proyecto2019'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
