@@ -17,6 +17,10 @@
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Documento</th>
+            <th scope ="col"> Editar </th>
+            <th scope="col"> Estado </th>
+            <th scope= "col">Habilitar acceso </th> 
+            <th scope= "col">Deshabilitar acceso </th>            
           </tr>
         </thead>
         <tbody>
@@ -25,8 +29,25 @@
             <th scope="row">1</th>
             <td>{{ user.first_name }}</td>
             <td>{{user.document}}</td>
+            <td>
+              <a href="{% url 'user:Administrador_editaregresado' user.id %}">Editar </a> 
+            </td>
+            {% if user.is_active %}
+              <td>Habilitado</td>
+            {% else %}
+              <td>Deshabilitado</i></td>
+            {% endif %}   
+            <td>
+              <form method="post" action="{% url 'user:Egresadohabilitar' user.id %}">{% csrf_token %}          
+                  <input class="btn btn-success" type="submit"   id="submit-auth-btn" name="authorize_user" value="Habilitar">
+              </form></td>     
+            <td>
+              <form method="post" action="{% url 'user:Egresadodeshabilitar' user.id %}">{% csrf_token %}          
+                  <input class="btn btn-danger" type="submit"   id="submit-auth-btn" name="authorize_user" value="Deshabilitar">
+              </form></td>
             </tr>
           {% endfor %} 
+          
         </tbody>
       </table>         
       </div>      

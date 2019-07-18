@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core',
     'pages.apps.PagesConfig',
     'mail_templated',
+    'profiles',
     
     
 ]

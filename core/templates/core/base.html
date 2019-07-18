@@ -65,7 +65,23 @@
                 {% if request.user.is_authenticated and request.user.is_Egresado  or request.user.is_Admon %}
                 <li class="nav-item">
                 <a class="nav-link" href="{% url 'pages:pages' %}">Noticias</a>
-                </li>                  
+                </li> 
+                {% if request.user.is_Admon %}
+                <li class="nav-item">
+                <a  class="nav-link" href="{% url 'user:Administrador_editar2' user.id %}">Editar Cuenta </a> 
+                </li>
+                {% endif %}
+                {% if request.user.is_Egresado %}
+                <li class="nav-item">
+                <a  class="nav-link" href="{% url 'user:Egresado_editar' user.id %}">Editar Cuenta </a> 
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'user:profile' %}">Perfil</a>
+                </li>
+                 <li class="nav-item">
+                <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
+                 </li>                   
+                {% endif %}
               {% endif %}
               
             </ul>

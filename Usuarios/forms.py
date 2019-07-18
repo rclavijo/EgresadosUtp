@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.db import transaction
-from .models import Egresado, User, Interests
+from .models import Egresado, User, Interests, Profile
 from django.forms import ModelForm
+from betterforms.multiform import MultiModelForm
 
 
 """
@@ -18,13 +19,47 @@ class CustomUserChangeForm(UserChangeForm):
         model = User
         fields = ('username', 'email')
 """
+
 class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = [
             'username','email',
         ]   
-        
+class UserModelForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name','last_name', 'document','address', 'city', 'gender', 'phone']
+
+
+class EgresadoModelForm(ModelForm):
+    YEARS= [x for x in range(1960,2001)]
+    datebirth = forms.DateField( label= "fecha de nacimiento", widget=forms.SelectDateWidget(years=YEARS))
+    country = forms.CharField(label= "País",max_length= "30")
+    class Meta:
+        model = Egresado
+        fields = ['country', 'datebirth']
+
+
+class EgrasadoModelForm(MultiModelForm):
+    
+    form_classes = {
+        'user': UserModelForm,
+        'egresado': EgresadoModelForm,
+    }
+
+    def save(self, commit=True):
+        objects = super().save(commit=False)
+
+        if commit:
+            user = objects['user']
+            user.save()
+            egresado = objects['egresado']
+            egresado.user = user
+            egresado.save()
+
+        return objects
+
 
         
 
@@ -35,7 +70,6 @@ class EgresadoSignUpForm(UserCreationForm):
     country = forms.CharField(label= "País",max_length= "30")
     email = forms.EmailField(required = True,  label = 'email',help_text = "Requerido, 254 caracteres como máximo y debe ser válido")
     
-
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ['first_name','last_name', 'document','address', 'city', 'gender', 'phone', 'email','username']
@@ -68,15 +102,25 @@ class EgresadoSignUpForm(UserCreationForm):
                                    datebirth=data['datebirth'],
                                    
                                    )
-        egresado.save()
-    
+        egresado.save()    
         return user
-
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         exclude = ('document','email', 'last_login', 'validate','groups','date_joined', 'is_superuser','username','password','is_Admon','is_Egresado','user_permissions','is_staff', 'is_active')
+
+class EgresadoUpdateForm(forms.ModelForm):
+    email = forms.EmailField(required = True,  label = 'email',help_text = "Requerido, 254 caracteres como máximo y debe ser válido")
+    class Meta:
+        model = User
+        exclude = ( 'last_login', 'validate','groups','date_joined', 'is_superuser','username','password','is_Admon','is_Egresado','user_permissions','is_staff', 'is_active', 'city','gender','address','phone')
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if 'email' in self.changed_data:
+            if User.objects.filter(email=email).exists():
+                raise forms.ValidationError("El email ya existe, prueba con otro")
+        return email
 
 class AdmonSignUpForm(UserCreationForm):    
     email = forms.EmailField(required = True,  label = 'email',help_text = "Requerido, 254 caracteres como máximo y debe ser válido")
@@ -99,4 +143,27 @@ class AdmonSignUpForm(UserCreationForm):
     
         return user
 
-      
+class ProfileForm(forms.ModelForm):
+    interests = forms.ModelMultipleChoiceField(queryset=Interests.objects.all(), widget=forms.CheckboxSelectMultiple)
+    class Meta:
+        model = Profile
+        fields = ['avatar','bio','link', 'interests']
+        widgets = {
+             'avatar' : forms.ClearableFileInput(attrs={'class':'form-control-file mt-3'}),
+             'bio' : forms.Textarea(attrs={'class':'form-control mt-3', 'rows': 3, 'placeholder': 'biografia'}),
+             'link' : forms.URLInput(attrs={'class':'form-control mt-3',  'placeholder': 'Enlace'}),
+         }
+
+class EmailForm(forms.ModelForm):
+    email = forms.EmailField(required = True,  label = 'email',help_text = "Requerido, 254 caracteres como máximo y debe ser válido")
+    
+    class Meta:
+        model = User
+        fields =['email']
+        
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if 'email' in self.changed_data:
+            if User.objects.filter(email=email).exists():
+                raise forms.ValidationError("El email ya existe, prueba con otro")
+        return email

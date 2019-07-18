@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MinLengthValidator
+from django.dispatch import receiver
+from django.db.models.signals import post_save
  
 def custom_uptload_to(instance, filename):
     old_instance = Profile.objects.get(pk=instance.pk)
@@ -43,8 +45,7 @@ class Egresado(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
   active = models.BooleanField(default=True)   
   country = models.TextField(verbose_name="Pais", null= True, blank= True)  
-  datebirth = models.DateField(verbose_name="Fecha De Nacimiento", null= True, blank= True)
-  interests = models.ManyToManyField(Interests, blank=True, related_name='interested_egresados')
+  datebirth = models.DateField(verbose_name="Fecha De Nacimiento", null= True, blank= True)  
   created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
   updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     
@@ -54,6 +55,7 @@ class Egresado(models.Model):
 class Profile(models.Model):
     User = models.OneToOneField(User , on_delete = models.CASCADE)
     avatar = models.ImageField(upload_to=custom_uptload_to, null = True, blank=True)
+    interests = models.ManyToManyField(Interests, blank=True, related_name='interested_egresados')
     bio = models.TextField(null = True, blank=True)
     link = models.URLField(max_length=200,null = True, blank=True)
 
