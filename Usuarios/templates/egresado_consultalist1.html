@@ -29,9 +29,9 @@
             <td>{{ user.first_name }}</td>
             <td>{{user.document}}</td>
             {% if user in EgresadosEncontrados_list %}
-              <td><i class="fas fa-check-circle"></i></td>
+              <td>Si</td>
             {% else %}
-              <td><i class="fas fa-ban"></i></td>
+              <td>No</td>
             {% endif %}
             <td>
               <form method="post" action="{% url 'user:Egresadovalidado' user.id %}">{% csrf_token %}          
