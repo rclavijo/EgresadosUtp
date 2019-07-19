@@ -144,7 +144,7 @@ class AdmonSignUpForm(UserCreationForm):
         return user
 
 class ProfileForm(forms.ModelForm):
-    interests = forms.ModelMultipleChoiceField(queryset=Interests.objects.all(), widget=forms.CheckboxSelectMultiple)
+    interests = forms.ModelMultipleChoiceField(queryset=Interests.objects.all(),widget=forms.CheckboxSelectMultiple())
     class Meta:
         model = Profile
         fields = ['avatar','bio','link', 'interests']

@@ -6,8 +6,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class PageCreationForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorUploadingWidget())
-    interests = forms.ModelMultipleChoiceField(queryset=Interests.objects.all(), widget=forms.CheckboxSelectMultiple())
+    interests = forms.ModelMultipleChoiceField(queryset=Interests.objects.all(), widget=forms.CheckboxSelectMultiple(attrs={'label':'intereses'}))
     class Meta:
         model =Page
         fields = ('title', 'content', 'archive','interests')

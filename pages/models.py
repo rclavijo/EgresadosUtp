@@ -10,10 +10,10 @@ def custom_uptload_to(instance, filename):
 
 class Page(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200)
-    content = FroalaField()
-    archive = models.ImageField(upload_to="media/", null=True, blank=True)
+    content = RichTextField(verbose_name="Contenido")
+    archive = models.ImageField(upload_to="media/", null=True, blank=True, verbose_name='archivo')
     order = models.SmallIntegerField(verbose_name="Orden", default=0)
-    interests = models.ManyToManyField(Interests, blank=True)
+    interests = models.ManyToManyField(Interests, blank=True, related_name= 'intereses')
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
