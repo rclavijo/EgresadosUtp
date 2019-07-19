@@ -63,6 +63,10 @@ def egresadovalidado(request, id_usuario):
     if request.method == 'POST' and 'authorize_user' in request.POST:
         user.validate = True
         user.save()
+        correo = user.email
+        username = user.username
+        send_mail('registration/ValidarEgresado.tpl', {}, 'proyectolabsw2019@gmail.com',
+                     [correo],subject= 'Validación Cuenta')  
         query = EgresadoConsulta.objects.values_list('document')
         EgresadosNo_list = User.objects.filter(Q(is_Egresado=True) & Q(validate=False))
         EgresadosEncontrados_list = User.objects.filter(Q(is_Egresado=True) & Q(document__in=query))

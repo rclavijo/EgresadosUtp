@@ -66,11 +66,13 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{% url 'pages:pages' %}">Noticias</a>
                 </li> 
+                <!--
                 {% if request.user.is_Admon %}
                 <li class="nav-item">
                 <a  class="nav-link" href="{% url 'user:Administrador_editar2' user.id %}">Editar Cuenta </a> 
                 </li>
                 {% endif %}
+                -->
                 {% if request.user.is_Egresado %}
                 <li class="nav-item">
                 <a  class="nav-link" href="{% url 'user:Egresado_editar' user.id %}">Editar Cuenta </a> 

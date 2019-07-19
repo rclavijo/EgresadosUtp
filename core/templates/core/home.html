@@ -71,7 +71,7 @@
                             <h5 class="card-title mb-0">PANEL DE CONTROL - SUPER USUARIO</h5>
                         </div>
                         <!--Colocar una imagen encima de otra imagen -->
-                        <div style="position:absolute; top:180px; left:310px; visibility:visible z-index:1"> 
+                        <div class="d-none d-md-block" style="position:absolute; top:180px; left:310px; visibility:visible z-index:1"> 
                           <img src="{% static 'core/img/registro/herramienta.png' %}" width="128px" height="128px"> 
                         </div> 
                         <!-- -->
@@ -154,6 +154,24 @@
                     </h4><br>
                 <!-- Fin Consultar Egresados --> 
 
+              <!-- Inicio Editar Cuenta -->
+                <div class="card-header">
+                    <h5 class="card-title mb-0" align="center">Editar Cuenta</h5>
+                </div>
+                    <!-- Imagen -->
+                    <p align="center"><br> 
+                      <img border="2" src="{% static 'core/img/acceso_usuario/editar_cuenta.png' %}"  width="128" height="128">
+                      </p> 
+                    <!-- Texto -->  
+                    <h4 align="center">
+                      <small align="justify">&nbsp Dale en el boton para Editar tu cuenta</small>
+                    </h4><br>
+                    <!-- Boton -->
+                    <h4 align="center">
+                      <a class="boton_personalizado2" href="{% url 'user:Administrador_editar2' user.id %}">Editar Cuenta</a>
+                    </h4><br>
+                <!-- Fin Editar Cuenta --> 
+
               </div>
         </div>
 
@@ -165,7 +183,7 @@
                             <h5 class="card-title mb-0">PANEL DE CONTROL - ADMINISTRADOR</h5>
                         </div>
                         <!--Colocar una imagen encima de otra imagen -->
-                        <div style="position:absolute; top:180px; left:310px; visibility:visible z-index:1"> 
+                        <div class="d-none d-md-block" style="position:absolute; top:180px; left:310px; visibility:visible z-index:1"> 
                           <img src="{% static 'core/img/registro/herramienta.png' %}" width="128px" height="128px"> 
                         </div> 
                         <!-- -->
