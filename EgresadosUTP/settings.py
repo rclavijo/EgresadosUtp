@@ -137,7 +137,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
 
 EMAIL_USE_TLS = True
 EMAIL_HOST =  'smtp.gmail.com'
@@ -145,3 +145,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'proyectolabsw2019@gmail.com'  
 EMAIL_HOST_PASSWORD = 'proyecto2019'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+GOOGLE_RECAPTCHA_SECRET_KEY = "6LfqYq4UAAAAAHRu_2L8a44nS5Ks-YjdlFO62zqf"

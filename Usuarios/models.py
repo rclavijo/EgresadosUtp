@@ -10,6 +10,9 @@ def custom_uptload_to(instance, filename):
     return 'profiles/' + filename
 
 
+
+
+
 class User(AbstractUser):
 
   GENRE_CHOICES = [
@@ -27,6 +30,11 @@ class User(AbstractUser):
   validate = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
   updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+     
+  
+
+  
 
 
 class Interests(models.Model):
@@ -59,6 +67,18 @@ class Profile(models.Model):
     bio = models.TextField(null = True, blank=True)
     link = models.URLField(max_length=200,null = True, blank=True)
 
+    def followers(self):
+     return Follower.objects.filter(account=self).count()
+
+    def following(self):
+      return Follower.objects.filter(user=self).count() 
+
+  
+
+    
+
+    
+
 class EgresadoConsulta(models.Model):
   active = models.BooleanField(default=True)   
   document = models.CharField(verbose_name="Documento", unique = True, max_length = 30)
@@ -69,6 +89,24 @@ class EgresadoConsulta(models.Model):
     return self.document
 
 
+class Follower (models.Model):
+  user = models.ForeignKey(Profile,
+        verbose_name='Seguidor',
+        on_delete=models.CASCADE,
+        related_name='follower_user'
+    )
+  account = models.ForeignKey(Profile,
+        verbose_name='Cuenta a seguir',
+        on_delete=models.CASCADE,
+        related_name='following_account'
+    )
 
+  def save(self, *args, **kwargs):
+       if self.user != self.account:
+           super(Follower, self).save(*args, **kwargs)
+
+  class Meta:
+       verbose_name = 'Seguidor'
+       verbose_name_plural = 'Seguidores'
 
       

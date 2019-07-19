@@ -16,7 +16,7 @@
                   {% if profile.avatar %}
                     <img src="{{profile.avatar.url}}" class="img-fluid profile-avatar">
                   {% else %}
-                    <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid profile-avatar">
+                    <img src="{% static 'usuarios/img/no-avatar.jpg' %}" class="img-fluid profile-avatar">
                   {% endif %}
                   <p class="profile-data">
                     <b>{{profile.user|truncatechars:"16"}}</b><br>
