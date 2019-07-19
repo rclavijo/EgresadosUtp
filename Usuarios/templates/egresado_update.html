@@ -4,9 +4,22 @@
 {% block content %}
 <style>.errorlist{color:red;} label{display:none}</style>
 <main role="main">
-<div class="col-md-9 mx-auto mb-5">
+<div class="col-md-9 mx-auto mb-5 bg-light">
 <form action="" method="post"> {% csrf_token %}
-<h2 class="sub-title">BIENVENDIO AL PROCESO DE REGISTRO</h2><br><br>                     
+<!-- Titulo del Registro de Usuario-->
+<br>
+<h3 class="mb-4 bg-info rounded border border-light text-dark" align="center"> 
+    <img src="{% static 'core/img/acceso_usuario/modificar_datos.png' %}" width="40" height="40"> &nbsp Editar Cuenta  
+</h3>
+<p class="sub-title text-dark">A continuación llena los que desees modificar {{user.first_name}}</p>
+<!-- Fin Titulo del Registro de Usuario-->  
+              <!-- Imagen del Registro de Usuario-->
+              <h2 class="d-none d-md-block texto-borde">
+                <img src="{% static 'core/img/acceso_Usuario/settings.png' %}" width="256" height="256" align="right">
+                
+              </h2>
+              <h4><br></h4>
+              <!-- Fin Imagen del Registro de Usuario-->                      
               {% for field in form %}
     <div class= "col-md-8 col-md-offset-2">
             <div class="form-group">
@@ -16,8 +29,9 @@
             </div>  
             </div>             
            {% endfor %}                        
-      <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
+      <p><input type="submit" class="btn btn-success btn-block" value="Confirmar"></p>
     </form>
+    <br>
     </div>
 </main>
 

@@ -4,10 +4,12 @@
 {% block content %}
 {% include 'pages/includes/pages_menu.html'%}
 <main role="main">
-  <div class="container">
+  <div class="container bg-light">
+    <br>
+    <h3 class="mb-4 bg-info rounded border border-light text-dark" align="center">Noticia</h3>
     <div class="row mt-3">
       <div class="col-md-9 mx-auto">
-        <h2 class="section-heading mb-4">{{page.title}}</h2>
+        <h3 class="section-heading mb-4 text-dark" align="center">{{page.title}}</h3>
         <div>
         <div class="col-md-8">
             {% if page.archive %}
@@ -16,10 +18,12 @@
                 <img src="{% static 'pages/img/descarga.png' %}" class="img-fluid">
               {% endif %}
               </div>
-          {{page.content|safe}}
+          <br>
+          <h5 class="text-dark" align="justify">{{page.content|striptags|safe}}</h5>
+          <br>
           {% if request.user.is_Admon %}
             <p><a href="{% url 'pages:update' page.id %}">Editar</a></p>
-
+            <br>
           {% endif %}
         </div>
       </div>

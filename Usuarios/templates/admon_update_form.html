@@ -3,21 +3,36 @@
 {% block title %}Actualizar Datos De Administrador{% endblock %}
 {% block content %}
 <main role="main">
-  <div class="container">
+  <br>
+  <div class="container bg-light">
+  <!-- Titulo del Registro de Usuario-->
+  <br>
+      <div class="col-md-9 mx-auto bg-light">    
+          <h3 class="mb-4 bg-info rounded border border-light text-dark" align="center">Modificar Usuario Administrador</h3>
+      </div>
+  <!-- Fin Titulo del Registro de Usuario-->  
+              <!-- Imagen del Registro de Usuario-->
+            <h2 class="d-none d-md-block texto-borde">
+              <img src="{% static 'core/img/acceso_Usuario/modificar_datos.png' %}" width="256" height="256" align="right">
+            </h2>
+            
+            <!-- Fin Imagen del Registro de Usuario--> 
     <div class="row mt-3">    
       <div class="col-md-9 mx-auto">
-      <h2> ingreso edición </h2>
+      <p class="sub-title text-dark">A continuación actualiza la información del Usuario Administrador correspondiente</p>
         <div>
             <form action="" method="post">{% csrf_token %}
                 <table>
                     {{ form.as_table }}
                 </table>
                 <br>
-                <input type="submit" class="btn btn-primary btn-block" value="Actualizar">
+                <input type="submit" class="btn btn-success" value="Actualizar">
             </form>
+            <br>
         </div>
       </div>
     </div>
   </div>
+  <br>
 </main>
 {% endblock %}

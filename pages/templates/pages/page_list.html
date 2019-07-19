@@ -36,25 +36,33 @@
   
   <div class="container bg-light">
   <br>
-  <h2> Usuario Esta siendo verificado, por favor espere confirmación </h2>
+  <h2 align="center">
+  <img src="{% static 'core/img/acceso_usuario/negar_acceso.png' %}" width="128" height="128" align="center">
+  </h2>
+  <br>
+  <h2 align="justify">{{user.first_name}} tu cuenta esta siendo verificada, por favor espera confirmación... </h2>
   <br>
   </div>
+  <br>
   
   {% else %}
   <div class="container mb-4 bg-light">
     {% for page in page_list|dictsort:"id" reversed %}
       <div class="row mt-3">
-        <div class="col-md-9 mx-auto">      
-          <h2 class="mb-4">{{page.title}} </h2>
+        <div class="col-md-9 mx-auto bg-light rounded border">    
+          &nbsp
+          <h3 class="mb-4 bg-info rounded border " align="center">{{page.title}} </h3>
           <div>
           <div class="col-md-2">
             {% if page.archive %}
-                <img src="{{page.archive.url}}" class="img-fluid">
+                <img src="{{page.archive.url}}" class="img-fluid rounded mb-0">
                 {%else %}
                 <img src="{% static 'pages/img/descarga.png' %}" class="img-fluid">
               {% endif %}
               </div>
-            <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>
+            &nbsp
+            <p class="text-dark">{{page.content|striptags|safe|truncatechars:"200"}}</p>
+            &nbsp
             <p><a href="{% url 'pages:page' page.id page.title|slugify %}">Leer más</a>
             </p>              
           </div>
