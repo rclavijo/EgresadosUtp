@@ -30,26 +30,26 @@
             <td>{{ user.first_name }}</td>
             <td>{{user.document}}</td>
             <td>
-              <a href="{% url 'user:Administrador_editar' user.id %}">Editar </a> 
+              <a href="{% url 'user:Administrador_editar' user.id %}">Editar </a>
             </td>
               {% if user.is_active %}
               <td>Habilitado</td>
             {% else %}
               <td>Deshabilitado</i></td>
-            {% endif %}    
+            {% endif %}
             <td>
-              <form method="post" action="{% url 'user:Admonhabilitar' user.id %}">{% csrf_token %}          
+              <form method="post" action="{% url 'user:Admonhabilitar' user.id %}">{% csrf_token %}
                   <input class="btn btn-success" type="submit"   id="submit-auth-btn" name="authorize_user" value="Habilitar">
-              </form></td>     
+             </form></td>
             <td>
-              <form method="post" action="{% url 'user:Admondeshabilitar' user.id %}">{% csrf_token %}          
+              <form method="post" action="{% url 'user:Admondeshabilitar' user.id %}">{% csrf_token %}
                   <input class="btn btn-danger" type="submit"   id="submit-auth-btn" name="authorize_user" value="Deshabilitar">
-              </form></td>          
+              </form></td>
             </tr>
-          {% endfor %} 
+          {% endfor %}
         </tbody>
-      </table>         
-      </div>      
+      </table>
+      </div>
   </div>
 </main>
 {% endblock %}
