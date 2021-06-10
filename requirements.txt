@@ -1,5 +1,5 @@
 Pillow == 6.0.0
-django == 2.0.2
+django == 2.2.24
 django-ckeditor ==  5.7.1
 django-mail-templated == 2.6.5
 django-froala-editor == 3.0.1 
